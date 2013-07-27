@@ -4,21 +4,21 @@
     <string-array name="autopro_categories">
         <item name="">Trang chủ</item>
         <item name="">Tin tức</item>
-        <item name="">Tin trong nước </item>
-        <item name="">Tin quốc tế </item>
-        <item name="">Đánh giá xe </item>
-        <item name="">Đánh giá Ô tô </item>
-        <item name="">Đánh giá Xe máy </item>
-        <item name="">Văn hóa xe </item>
-        <item name="">Xem chơi </item>
-        <item name="">Kỹ thuật, Tư vấn </item>
+        <item name="">Tin trong nước</item>
+        <item name="">Tin quốc tế</item>
+        <item name="">Đánh giá xe</item>
+        <item name="">Đánh giá Ô tô</item>
+        <item name="">Đánh giá Xe máy</item>
+        <item name="">Văn hóa xe</item>
+        <item name="">Xem chơi</item>
+        <item name="">Kỹ thuật, Tư vấn</item>
         <item name="">Kỹ thuật</item>
-        <item name="">Tư vấn </item>
-        <item name="">Xe máy </item>
-        <item name="">Xe đua - Đua xe </item>
-        <item name="">Đua xe </item>
-        <item name="">Xe đua </item>
-        <item name="">Me - Pro </item>
+        <item name="">Tư vấn</item>
+        <item name="">Xe máy</item>
+        <item name="">Xe đua - Đua xe</item>
+        <item name="">Đua xe</item>
+        <item name="">Xe đua</item>
+        <item name="">Me - Pro</item>
     </string-array>
     
     <string-array name="autopro_rss">

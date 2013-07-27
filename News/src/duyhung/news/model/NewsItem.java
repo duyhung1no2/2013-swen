@@ -1,18 +1,21 @@
 package duyhung.news.model;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class NewsItem {
+public class NewsItem implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private String title;
 	private String link;
 	private String description;
-	private Date pubDate;
-	
-	public NewsItem(){
-		
+	private String pubDate;
+
+	public NewsItem() {
+
 	}
 
-	public NewsItem(String title, String link, String description, Date pubDate) {
+	public NewsItem(String title, String link, String description,
+			String pubDate) {
 		super();
 		this.title = title;
 		this.link = link;
@@ -44,12 +47,17 @@ public class NewsItem {
 		this.description = description;
 	}
 
-	public Date getPubDate() {
+	public String getPubDate() {
 		return pubDate;
 	}
 
-	public void setPubDate(Date pubDate) {
+	public void setPubDate(String pubDate) {
 		this.pubDate = pubDate;
+	}
+
+	@Override
+	public String toString() {
+		return this.title;
 	}
 
 }
