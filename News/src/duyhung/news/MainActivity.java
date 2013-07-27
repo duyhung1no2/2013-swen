@@ -1,40 +1,34 @@
 package duyhung.news;
 
-import android.app.ListActivity;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import duyhung.news.adapter.CategoryAdapter;
 
-public class MainActivity extends ListActivity{
+public class MainActivity extends Activity{
 
+	private ListView categoryListView;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.vne_categories)));
 		
-	}
-	
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-
-		Intent i = new Intent(getApplicationContext(), NewsActivity.class);
-		i.putExtra("POSITION", position);
-		startActivity(i);
+		categoryListView = (ListView) findViewById(R.id.categoryListView);
+		categoryListView.setAdapter(new CategoryAdapter(this, R.layout.listview_item_category, getResources().getStringArray(R.array.vne_categories)));
+		categoryListView.setOnItemClickListener(listener);
 	}
 
-/*	public class RetrieveNewsList extends AsyncTask<String, Void, List<NewsItem>> {
-
+	private OnItemClickListener listener = new OnItemClickListener() {
 		@Override
-		protected List<NewsItem> doInBackground(String... params) {
-			
-			return null;
+		public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+			Intent i = new Intent(getApplicationContext(), NewsActivity.class);
+			i.putExtra("POSITION", position);
+			startActivity(i);			
 		}
-
-	}
-*/
+	};
 }
