@@ -14,7 +14,7 @@ public class MainActivity extends ListActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.autopro_categories)));
+		setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.vne_categories)));
 		
 	}
 	

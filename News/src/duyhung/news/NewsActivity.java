@@ -20,7 +20,10 @@ public class NewsActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_news);
 
-		linkRss = getResources().getStringArray(R.array.autopro_rss)[getIntent().getExtras().getInt("POSITION")];
+		int position = getIntent().getExtras().getInt("POSITION");
+		String categoryName = getResources().getStringArray(R.array.vne_categories)[position];
+		setTitle(categoryName);
+		linkRss = getResources().getStringArray(R.array.vne_rss)[position];
 		progressDialog = new ProgressDialog(this);
 		progressDialog.setMessage("Loading news ... ");
 		progressDialog.show();

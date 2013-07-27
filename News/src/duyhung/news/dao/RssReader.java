@@ -1,8 +1,5 @@
 package duyhung.news.dao;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,31 +18,24 @@ public class RssReader {
 		List<NewsItem> newsList = new ArrayList<NewsItem>();
 
 		try {
-			URL url = new URL(inputLink);
-			URLConnection connection = url.openConnection();
+			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputLink);
 
-			HttpURLConnection httpConnection = (HttpURLConnection) connection;
+			NodeList itemList = doc.getElementsByTagName(Variables.ITEM);
+			if (itemList != null && itemList.getLength() > 0) {
+				for (int i = 0; i < itemList.getLength(); i++) {
+					Element crtElm = (Element) itemList.item(i);
+					String title = crtElm.getElementsByTagName(Variables.TITLE).item(0).getTextContent();
+					String link = crtElm.getElementsByTagName(Variables.LINK).item(0).getTextContent();
+					String description = crtElm.getElementsByTagName(Variables.DESCRIPTION).item(0).getTextContent();
+					String pubDate = crtElm.getElementsByTagName(Variables.PUB_DATE).item(0).getTextContent();
 
-			if (httpConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-
-				Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(httpConnection.getInputStream());
-				
-				NodeList itemList = doc.getElementsByTagName(Variables.ITEM);
-				if(itemList != null && itemList.getLength() > 0) {
-					for (int i = 0; i < itemList.getLength(); i++) {
-						Element crtElm = (Element) itemList.item(i);
-						String title = crtElm.getElementsByTagName(Variables.TITLE).item(0).getTextContent();
-						String link = crtElm.getElementsByTagName(Variables.LINK).item(0).getTextContent();
-						String description = crtElm.getElementsByTagName(Variables.DESCRIPTION).item(0).getTextContent();
-						String pubDate = crtElm.getElementsByTagName(Variables.PUB_DATE).item(0).getTextContent();
-	
-						newsList.add(new NewsItem(title, link, description, pubDate));
-					}
+					newsList.add(new NewsItem(title, link, description, pubDate));
 				}
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 
 		return newsList;
 	}

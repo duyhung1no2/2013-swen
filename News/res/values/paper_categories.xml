@@ -1,44 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="autopro_categories">
+    <string-array name="vne_categories">
         <item name="">Trang chủ</item>
-        <item name="">Tin tức</item>
-        <item name="">Tin trong nước</item>
-        <item name="">Tin quốc tế</item>
-        <item name="">Đánh giá xe</item>
-        <item name="">Đánh giá Ô tô</item>
-        <item name="">Đánh giá Xe máy</item>
-        <item name="">Văn hóa xe</item>
-        <item name="">Xem chơi</item>
-        <item name="">Kỹ thuật, Tư vấn</item>
-        <item name="">Kỹ thuật</item>
-        <item name="">Tư vấn</item>
-        <item name="">Xe máy</item>
-        <item name="">Xe đua - Đua xe</item>
-        <item name="">Đua xe</item>
-        <item name="">Xe đua</item>
-        <item name="">Me - Pro</item>
+        <item name="">Xã hội</item>
+        <item name="">Thế giới</item>
+        <item name="">Kinh doanh</item>
+        <item name="">Văn hoá</item>
+        <item name="">Thể thao</item>
+        <item name="">Pháp luật</item>
+        <item name="">Đời sống</item>
+        <item name="">Khoa học</item>
+        <item name="">Vi tính</item>
+        <item name="">Ôtô - Xe máy</item>
+        <item name="">Bạn đọc viết</item>
+        <item name="">Tâm sự</item>
+        <item name="">Cười</item>
     </string-array>
-    
-    <string-array name="autopro_rss">
-        <item name="">http://autopro.com.vn/home.rss</item>
-        <item name="">http://autopro.com.vn/tin-tuc.rss</item>
-        <item name="">http://autopro.com.vn/tin-tuc/trong-nuoc.rss</item>
-        <item name="">http://autopro.com.vn/tin-tuc/quoc-te.rss</item>
-        <item name="">http://autopro.com.vn/danh-gia-xe.rss</item>
-        <item name="">http://autopro.com.vn/danh-gia-xe/oto.rss</item>
-        <item name="">http://autopro.com.vn/danh-gia-xe/xe-may.rss</item>
-        <item name="">http://autopro.com.vn/van-hoa-xe.rss</item>
-        <item name="">http://autopro.com.vn/van-hoa-xe/xem-choi.rss</item>
-        <item name="">http://autopro.com.vn/ky-thuat-tu-van.rss</item>
-        <item name="">http://autopro.com.vn/ky-thuat-tu-van/ky-thuat.rss</item>
-        <item name="">http://autopro.com.vn/ky-thuat-tu-van/tu-van.rss</item>
-        <item name="">http://autopro.com.vn/xe-may.rss</item>
-        <item name="">http://autopro.com.vn/xe-dua-dua-xe.rss</item>
-        <item name="">http://autopro.com.vn/xe-dua-dua-xe/dua-xe.rss</item>
-        <item name="">http://autopro.com.vn/xe-dua-dua-xe/xe-dua.rss</item>
-        <item name="">http://autopro.com.vn/autopro-ban-be.rss</item>
+    <string-array name="vne_rss">
+        <item name="">http://vnexpress.net/rss/tin-moi-nhat.rss</item>
+        <item name="">http://vnexpress.net/rss/xa-hoi.rss</item>
+        <item name="">http://vnexpress.net/rss/the-gioi.rss</item>
+        <item name="">http://kinhdoanh.vnexpress.net/rss</item>
+        <item name="">http://giaitri.vnexpress.net/rss</item>
+        <item name="">http://thethao.vnexpress.net/rss/tin-moi-nhat.rss</item>
+        <item name="">http://vnexpress.net/rss/phap-luat.rss</item>
+        <item name="">http://giaitri.vnexpress.net/rss</item>
+        <item name="">http://vnexpress.net/rss/khoa-hoc.rss</item>
+        <item name="">http://sohoa.vnexpress.net/rss</item>
+        <item name="">http://vnexpress.net/rss/oto-xe-may.rss</item>
+        <item name="">http://vnexpress.net/rss/ban-doc-viet.rss</item>
+        <item name="">http://vnexpress.net/rss/ban-doc-viet-tam-su.rss</item>
+        <item name="">http://vnexpress.net/rss/cuoi.rss</item>
     </string-array>
 
 </resources>
