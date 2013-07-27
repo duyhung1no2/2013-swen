@@ -3,6 +3,7 @@ package duyhung.news;
 import java.util.List;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -12,6 +13,7 @@ import duyhung.news.model.NewsItem;
 public class NewsActivity extends ListActivity {
 	private List<NewsItem> newsList;
 	private String linkRss;
+	private ProgressDialog progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +21,9 @@ public class NewsActivity extends ListActivity {
 		setContentView(R.layout.activity_news);
 
 		linkRss = getResources().getStringArray(R.array.autopro_rss)[getIntent().getExtras().getInt("POSITION")];
-		new RssReader().getNewsList(linkRss);
+		progressDialog = new ProgressDialog(this);
+		progressDialog.setMessage("Loading news ... ");
+		progressDialog.show();
 		new RetrieveNewsList().execute();
 
 	}
@@ -28,9 +32,15 @@ public class NewsActivity extends ListActivity {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			new RssReader().getNewsList(linkRss);
-			getListView().setAdapter(new ArrayAdapter<NewsItem>(getApplicationContext(), android.R.layout.simple_list_item_1, newsList));
+			newsList = new RssReader().getNewsList(linkRss);
 			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			getListView().setAdapter(new ArrayAdapter<NewsItem>(getApplicationContext(), android.R.layout.simple_list_item_1, newsList));
+			progressDialog.dismiss();
 		}
 
 	}
