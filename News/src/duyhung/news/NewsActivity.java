@@ -4,8 +4,11 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
 import duyhung.news.adapter.NewsAdapter;
 import duyhung.news.dao.RssReader;
 import duyhung.news.model.NewsItem;
@@ -37,6 +40,16 @@ public class NewsActivity extends ListActivity {
 			new RetrieveNewsList().execute();
 		}
 
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
+		String newsLink = ((NewsItem) l.getAdapter().getItem(position)).getLink();
+		
+		Intent newsDetailsIntent = new Intent(getApplicationContext(), NewsReadActivity.class);
+		newsDetailsIntent.putExtra(Variables.LINK, newsLink);
+		startActivity(newsDetailsIntent);
 	}
 
 	private class RetrieveNewsList extends AsyncTask<Void, Void, Void> {
