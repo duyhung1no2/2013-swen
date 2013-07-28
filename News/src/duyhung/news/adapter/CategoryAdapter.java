@@ -14,8 +14,8 @@ public class CategoryAdapter extends ArrayAdapter<String> {
 	private Context mContext;
 	private String[] categories;
 
-	public CategoryAdapter(Context context, int resource, String[] objects) {
-		super(context, resource, objects);
+	public CategoryAdapter(Context context, String[] objects) {
+		super(context, R.layout.listview_item_category, objects);
 		this.mContext = context;
 		this.categories = objects;
 	}

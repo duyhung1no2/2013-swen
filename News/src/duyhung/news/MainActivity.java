@@ -19,7 +19,7 @@ public class MainActivity extends Activity{
 		setContentView(R.layout.activity_main);
 		
 		categoryListView = (ListView) findViewById(R.id.categoryListView);
-		categoryListView.setAdapter(new CategoryAdapter(this, R.layout.listview_item_category, getResources().getStringArray(R.array.vne_categories)));
+		categoryListView.setAdapter(new CategoryAdapter(this, getResources().getStringArray(R.array.vne_categories)));
 		categoryListView.setOnItemClickListener(listener);
 	}
 

@@ -6,9 +6,10 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import duyhung.news.adapter.NewsAdapter;
 import duyhung.news.dao.RssReader;
 import duyhung.news.model.NewsItem;
+import duyhung.news.model.Variables;
 
 public class NewsActivity extends ListActivity {
 	private List<NewsItem> newsList;
@@ -24,10 +25,17 @@ public class NewsActivity extends ListActivity {
 		String categoryName = getResources().getStringArray(R.array.vne_categories)[position];
 		setTitle(categoryName);
 		linkRss = getResources().getStringArray(R.array.vne_rss)[position];
-		progressDialog = new ProgressDialog(this);
-		progressDialog.setMessage("Loading news ... ");
-		progressDialog.show();
-		new RetrieveNewsList().execute();
+
+		if (Variables.SAVED_NEWS_LIST.containsKey(linkRss)) {
+			newsList = Variables.SAVED_NEWS_LIST.get(linkRss);
+			setListAdapter(new NewsAdapter(this, newsList));
+		} else {
+			progressDialog = new ProgressDialog(this);
+			progressDialog.setMessage("Loading news ... ");
+			progressDialog.show();
+
+			new RetrieveNewsList().execute();
+		}
 
 	}
 
@@ -38,11 +46,12 @@ public class NewsActivity extends ListActivity {
 			newsList = new RssReader().getNewsList(linkRss);
 			return null;
 		}
-		
+
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			getListView().setAdapter(new ArrayAdapter<NewsItem>(getApplicationContext(), android.R.layout.simple_list_item_1, newsList));
+			getListView().setAdapter(new NewsAdapter(getApplicationContext(), newsList));
+			Variables.SAVED_NEWS_LIST.put(linkRss, newsList);
 			progressDialog.dismiss();
 		}
 
