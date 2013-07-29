@@ -1,6 +1,5 @@
 package duyhung.news;
 
-import java.io.ObjectOutputStream.PutField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,43 +76,5 @@ public class MainActivity extends FragmentActivity {
 		}
 
 	};
-
-//	public void retrieveNews(int position) {
-//		String linkRss = getResources().getStringArray(R.array.vne_rss)[position];
-//
-//		if (Variables.SAVED_NEWS_LIST.containsKey(linkRss)) {
-//			fragmentList.get(position).setNewsList(Variables.SAVED_NEWS_LIST.get(linkRss));
-//		} else {
-//			progressDialog = ProgressDialog.show(MainActivity.this, "", "Đang tải dữ liệu ... ");
-//			List<NewsItem> newsList = new ArrayList<NewsItem>();
-//			try {
-//				newsList = new RetrieveNewsListTask().execute(linkRss).get();
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			} finally {
-//				fragmentList.get(position).setNewsList(newsList);
-//			}
-//		}
-//	}
-//
-//	private class RetrieveNewsListTask extends AsyncTask<String, Void, List<NewsItem>> {
-//
-//		String link = "";
-//		List<NewsItem> result;
-//		@Override
-//		protected List<NewsItem> doInBackground(String... params) {
-//			link = params[0];
-//			result = new RssReader().getNewsList(params[0]);
-//			return result;
-//		}
-//
-//		@Override
-//		protected void onPostExecute(List<NewsItem> result) {
-//			super.onPostExecute(result);
-//			Variables.SAVED_NEWS_LIST.put(link, result);
-//			if (progressDialog != null) {
-//				progressDialog.dismiss();
-//			}
-//		}
 
 }

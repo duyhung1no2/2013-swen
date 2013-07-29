@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ public class NewsAdapter extends ArrayAdapter<NewsItem> {
 
 	private Context mContext;
 	private List<NewsItem> newsList;
+	
+	private ImageView categoryIcon;
 
 	public NewsAdapter(Context context, List<NewsItem> newsList) {
 		super(context, R.layout.listview_item_news, newsList);
@@ -34,20 +37,20 @@ public class NewsAdapter extends ArrayAdapter<NewsItem> {
 		View v = inflater.inflate(R.layout.listview_item_news, parent, false);
 		NewsItem item = newsList.get(position);
 
+		categoryIcon = (ImageView) v.findViewById(R.id.newsTitleImageView);
+
 		String desc = item.getDescription();
 		String imageUrl = getImageUrl(desc);
-		Bitmap imageBitmap = null;
+		Bitmap bm = null;
 		try {
-			imageBitmap = BitmapFactory.decodeStream(new URL(imageUrl).openStream());
+			bm = new LoadImageTask().execute(imageUrl).get();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		ImageView categoryIcon = (ImageView) v.findViewById(R.id.newsTitleImageView);
-//		categoryIcon.getLayoutParams().width = 60;
-//		categoryIcon.getLayoutParams().height = 40;
-		categoryIcon.setImageBitmap(imageBitmap);
-
+		categoryIcon.setImageBitmap(bm);
+		categoryIcon.getLayoutParams().width = 60;
+		categoryIcon.getLayoutParams().height = 40;
+		
 		TextView titleTextView = (TextView) v.findViewById(R.id.newsTitleTextView);
 
 		titleTextView.setText(item.getTitle());
@@ -63,6 +66,26 @@ public class NewsAdapter extends ArrayAdapter<NewsItem> {
 		if (matcher.find())
 			return matcher.group(1);
 		return "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/372810_262700667105773_1895213017_q.jpg";
+	}
+	
+	private class LoadImageTask extends AsyncTask<String, Void, Bitmap>{
+
+		Bitmap bm = null;
+		
+		@Override
+		protected Bitmap doInBackground(String... params) {
+			try {
+				bm = BitmapFactory.decodeStream(new URL(params[0]).openStream());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return bm;
+		}
+		
+		@Override
+		protected void onPostExecute(Bitmap result) {
+			super.onPostExecute(result);
+		}
 	}
 
 }
