@@ -1,5 +1,6 @@
 package duyhung.news;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ProgressDialog;
@@ -30,25 +31,28 @@ public class NewsFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		newsList = new ArrayList<NewsItem>();
 		View v = inflater.inflate(R.layout.fragment_news, container, false);
 		newsListView = (ListView) v.findViewById(R.id.newsListView);
-		retrieveNews();
+		newsListView.setAdapter(new NewsAdapter(getActivity(), newsList));
 		return v;
 	}
-	
-	public void retrieveNews(){
-		int position = getArguments().getInt(ARG_POSITION);
-		linkRss = getResources().getStringArray(R.array.vne_rss)[position];
-		
-		if (Variables.SAVED_NEWS_LIST.containsKey(linkRss)) {
-			newsList = Variables.SAVED_NEWS_LIST.get(linkRss);
-			newsListView.setAdapter(new NewsAdapter(getActivity(), newsList));
-		} else {
-			progressDialog = new ProgressDialog(getActivity());
-			progressDialog.setMessage("Loading news ... ");
-			progressDialog.show();
 
-			new RetrieveNewsListTask().execute();
+	public void retrieveNews() {
+		if(isAdded()) {
+			int position = getArguments().getInt(ARG_POSITION);
+			linkRss = getResources().getStringArray(R.array.vne_rss)[position];
+
+			if (Variables.SAVED_NEWS_LIST.containsKey(linkRss)) {
+				newsList = Variables.SAVED_NEWS_LIST.get(linkRss);
+				newsListView.setAdapter(new NewsAdapter(getActivity(), newsList));
+			} else {
+				progressDialog = new ProgressDialog(getActivity());
+				progressDialog.setMessage("Loading news ... ");
+				progressDialog.show();
+
+				new RetrieveNewsListTask().execute();
+			}
 		}
 	}
 
@@ -74,11 +78,15 @@ public class NewsFragment extends Fragment {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-			newsListView.setAdapter(new NewsAdapter(getActivity(), newsList));
-			newsListView.setOnItemClickListener(onNewsItemClickListener);
-			Variables.SAVED_NEWS_LIST.put(linkRss, newsList);
-			progressDialog.dismiss();
+			if (isAdded()) {
+				super.onPostExecute(result);
+				newsListView.setAdapter(new NewsAdapter(getActivity(), newsList));
+				newsListView.setOnItemClickListener(onNewsItemClickListener);
+				Variables.SAVED_NEWS_LIST.put(linkRss, newsList);
+				if (progressDialog != null) {
+					progressDialog.dismiss();
+				}
+			}
 		}
 
 	}

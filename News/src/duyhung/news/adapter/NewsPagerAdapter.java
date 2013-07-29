@@ -1,6 +1,7 @@
 package duyhung.news.adapter;
 
-import android.os.Bundle;
+import java.util.List;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -8,22 +9,21 @@ import duyhung.news.NewsFragment;
 
 public class NewsPagerAdapter extends FragmentPagerAdapter {
 
-	public NewsPagerAdapter(FragmentManager fm) {
+	private List<NewsFragment> fragList;
+
+	public NewsPagerAdapter(FragmentManager fm, List<NewsFragment> list) {
 		super(fm);
+		this.fragList = list;
 	}
 
 	@Override
 	public Fragment getItem(int position) {
-		NewsFragment newsFrag = new NewsFragment();
-		Bundle bundle = new Bundle();
-		bundle.putInt(NewsFragment.ARG_POSITION, position);
-		newsFrag.setArguments(bundle);
-		return newsFrag;
+		return fragList.get(position);
 	}
 
 	@Override
 	public int getCount() {
-		return 14;
+		return fragList.size();
 	}
 
 }
