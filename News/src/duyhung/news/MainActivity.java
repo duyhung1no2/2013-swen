@@ -1,34 +1,65 @@
 package duyhung.news;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.ActionBar.TabListener;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
-import duyhung.news.adapter.CategoryAdapter;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import duyhung.news.adapter.NewsPagerAdapter;
 
-public class MainActivity extends Activity{
+public class MainActivity extends FragmentActivity {
 
-	private ListView categoryListView;
-	
+	private NewsPagerAdapter adapter;
+
+	private ViewPager newsPager;
+	private ActionBar actionBar;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		categoryListView = (ListView) findViewById(R.id.categoryListView);
-		categoryListView.setAdapter(new CategoryAdapter(this, getResources().getStringArray(R.array.vne_categories)));
-		categoryListView.setOnItemClickListener(listener);
+
+		actionBar = getActionBar();
+		actionBar.setHomeButtonEnabled(true);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+		newsPager = (ViewPager) findViewById(R.id.newsPager);
+
+		adapter = new NewsPagerAdapter(getSupportFragmentManager());
+		newsPager.setAdapter(adapter);
+		newsPager.setOnPageChangeListener(onNewsPagerChangedListener);
+
+		for (int i = 0; i < adapter.getCount(); i++) {
+			actionBar.addTab(actionBar.newTab().setText(getResources().getStringArray(R.array.vne_categories)[i]).setTabListener(tabListener));
+		}
+
 	}
 
-	private OnItemClickListener listener = new OnItemClickListener() {
-		@Override
-		public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-			Intent i = new Intent(getApplicationContext(), NewsActivity.class);
-			i.putExtra("POSITION", position);
-			startActivity(i);			
-		}
+	private OnPageChangeListener onNewsPagerChangedListener = new ViewPager.SimpleOnPageChangeListener() {
+		public void onPageSelected(int position) {
+			actionBar.setSelectedNavigationItem(position);
+		};
 	};
+
+	private TabListener tabListener = new TabListener() {
+
+		@Override
+		public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+		}
+
+		@Override
+		public void onTabSelected(Tab tab, FragmentTransaction ft) {
+			newsPager.setCurrentItem(tab.getPosition());
+		}
+
+		@Override
+		public void onTabReselected(Tab tab, FragmentTransaction ft) {
+		}
+
+	};
+
+
 }

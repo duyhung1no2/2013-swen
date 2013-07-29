@@ -44,8 +44,8 @@ public class NewsAdapter extends ArrayAdapter<NewsItem> {
 		}
 
 		ImageView categoryIcon = (ImageView) v.findViewById(R.id.newsTitleImageView);
-		categoryIcon.getLayoutParams().width = 60;
-		categoryIcon.getLayoutParams().height = 40;
+//		categoryIcon.getLayoutParams().width = 60;
+//		categoryIcon.getLayoutParams().height = 40;
 		categoryIcon.setImageBitmap(imageBitmap);
 
 		TextView titleTextView = (TextView) v.findViewById(R.id.newsTitleTextView);
