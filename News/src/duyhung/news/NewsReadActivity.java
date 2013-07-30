@@ -2,7 +2,6 @@ package duyhung.news;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -21,25 +20,18 @@ public class NewsReadActivity extends Activity {
 		String newsLink = getIntent().getExtras().getString(Variables.LINK);
 		
 		newsWebView = (WebView) findViewById(R.id.newsWebView);
-/*		newsWebView.getSettings().setSupportZoom(true);
-		newsWebView.setInitialScale(1);
-		newsWebView.getSettings().setLoadWithOverviewMode(true);
-		newsWebView.getSettings().setUseWideViewPort(true);
-		newsWebView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-		newsWebView.setScrollbarFadingEnabled(false);*/
+//		newsWebView.getSettings().setSupportZoom(true);
+//		newsWebView.setInitialScale(1);
+//		newsWebView.getSettings().setLoadWithOverviewMode(true);
+//		newsWebView.getSettings().setUseWideViewPort(true);
+//		newsWebView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+//		newsWebView.setScrollbarFadingEnabled(false);
 		
 		progressDialog = ProgressDialog.show(this, "", "Loading news ... ");
 		
 		newsWebView.setWebViewClient(new NewsWebViewClient());
-		new RetrieveNewsDetails().execute(newsLink);
-	}
-
-	private class RetrieveNewsDetails extends AsyncTask<String, Void, Void> {
-		@Override
-		protected Void doInBackground(String... params) {
-			newsWebView.loadUrl(params[0]);
-			return null;
-		}
+		newsWebView.loadUrl(newsLink);
+//		new RetrieveNewsDetails().execute(newsLink);
 	}
 
 	private class NewsWebViewClient extends WebViewClient{

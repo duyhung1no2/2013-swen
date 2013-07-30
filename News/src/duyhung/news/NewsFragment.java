@@ -34,7 +34,9 @@ public class NewsFragment extends Fragment {
 		newsList = new ArrayList<NewsItem>();
 		View v = inflater.inflate(R.layout.fragment_news, container, false);
 		newsListView = (ListView) v.findViewById(R.id.newsListView);
-		newsListView.setAdapter(new NewsAdapter(getActivity(), newsList));
+		newsListView.setAdapter(new NewsAdapter(getActivity(), newsList));				
+		newsListView.setOnItemClickListener(onNewsItemClickListener);
+
 		return v;
 	}
 
@@ -81,7 +83,6 @@ public class NewsFragment extends Fragment {
 			if (isAdded()) {
 				super.onPostExecute(result);
 				newsListView.setAdapter(new NewsAdapter(getActivity(), newsList));
-				newsListView.setOnItemClickListener(onNewsItemClickListener);
 				Variables.SAVED_NEWS_LIST.put(linkRss, newsList);
 				if (progressDialog != null) {
 					progressDialog.dismiss();
