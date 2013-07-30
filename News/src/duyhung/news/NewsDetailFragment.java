@@ -34,6 +34,7 @@ public class NewsDetailFragment extends Activity {
 	}
 
 	private class NewsWebViewClient extends WebViewClient{
+		
 		@Override
 		public void onPageFinished(WebView view, String url) {
 			if(progressDialog != null){
