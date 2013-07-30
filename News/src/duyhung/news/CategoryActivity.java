@@ -11,14 +11,14 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import duyhung.news.adapter.NewsPagerAdapter;
+import duyhung.news.adapter.CategoryPagerAdapter;
 
 public class CategoryActivity extends FragmentActivity {
 
 	private ViewPager newsPager;
 	private ActionBar actionBar;
 
-	private NewsPagerAdapter adapter;
+	private CategoryPagerAdapter adapter;
 	private List<NewsFragment> fragmentList;
 
 	@Override
@@ -44,7 +44,7 @@ public class CategoryActivity extends FragmentActivity {
 				}
 			}
 		};
-		adapter = new NewsPagerAdapter(getSupportFragmentManager(), fragmentList);
+		adapter = new CategoryPagerAdapter(getSupportFragmentManager(), fragmentList);
 		newsPager.setAdapter(adapter);
 		newsPager.setOnPageChangeListener(onNewsPagerChangedListener);
 
