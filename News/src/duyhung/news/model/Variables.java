@@ -10,6 +10,8 @@ public class Variables {
 	public static final String DESCRIPTION = "description";
 	public static final String PUB_DATE = "pubDate";
 	
+	public static final String SELECTED_ITEM_POSITION = "SELECTED_ITEM_POSITION";
+	
 	public static HashMap<String, List<NewsItem>> SAVED_NEWS_LIST = new HashMap<String, List<NewsItem>>(); 
 	
 //	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss tt");

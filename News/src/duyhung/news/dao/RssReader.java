@@ -23,7 +23,7 @@ public class RssReader {
 
 			NodeList itemList = doc.getElementsByTagName(Variables.ITEM);
 			if (itemList != null && itemList.getLength() > 0) {
-				for (int i = 0; i < itemList.getLength(); i++) {
+				for (int i = 0; i < 10/*itemList.getLength()*/; i++) {
 					Element crtElm = (Element) itemList.item(i);
 					String title = crtElm.getElementsByTagName(Variables.TITLE).item(0).getTextContent();
 					String link = crtElm.getElementsByTagName(Variables.LINK).item(0).getTextContent();

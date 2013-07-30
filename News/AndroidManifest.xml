@@ -27,11 +27,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="duyhung.news.NewsFragment"
+            android:name="duyhung.news.CategoryFragment"
             android:label="@string/title_activity_news" >
         </activity>
         <activity
-            android:name="duyhung.news.NewsDetailFragment"
+            android:name="duyhung.news.NewsFragment"
             android:label="@string/title_activity_news_read" >
         </activity>
         <activity

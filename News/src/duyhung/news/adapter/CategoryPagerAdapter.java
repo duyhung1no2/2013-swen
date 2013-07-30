@@ -2,22 +2,21 @@ package duyhung.news.adapter;
 
 import java.util.List;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import duyhung.news.NewsFragment;
+import duyhung.news.CategoryFragment;
 
 public class CategoryPagerAdapter extends FragmentPagerAdapter {
 
-	private List<NewsFragment> fragList;
+	private List<CategoryFragment> fragList;
 
-	public CategoryPagerAdapter(FragmentManager fm, List<NewsFragment> list) {
+	public CategoryPagerAdapter(FragmentManager fm, List<CategoryFragment> list) {
 		super(fm);
 		this.fragList = list;
 	}
 
 	@Override
-	public Fragment getItem(int position) {
+	public CategoryFragment getItem(int position) {
 		return fragList.get(position);
 	}
 

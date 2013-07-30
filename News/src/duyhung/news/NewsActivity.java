@@ -1,22 +1,56 @@
 package duyhung.news;
 
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
+import java.util.ArrayList;
+import java.util.List;
 
-public class NewsActivity extends Activity {
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import duyhung.news.adapter.NewsPagerAdapter;
+import duyhung.news.model.Variables;
+
+public class NewsActivity extends FragmentActivity {
+
+	private ViewPager pager;
+	
+	private List<NewsFragment> fragments;
+	private String[] urls;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_news);
+		setTitle("Đọc tin");
+		
+		pager = (ViewPager) findViewById(R.id.newsPager);
+		
+		urls = getIntent().getExtras().getStringArray(Variables.LINK);
+		fragments = new ArrayList<NewsFragment>();
+
+		for (int i = 0; i < urls.length; i++) {
+			NewsFragment newsFrag = new NewsFragment();
+			Bundle bundle = new Bundle();
+			bundle.putString(Variables.LINK, urls[i]);
+			if(getIntent().getExtras().getInt(Variables.SELECTED_ITEM_POSITION) == i){
+				bundle.putBoolean(NewsFragment.IS_SELECTED, true);
+			} else{
+				bundle.putBoolean(NewsFragment.IS_SELECTED, false);
+			}
+			newsFrag.setArguments(bundle);
+			fragments.add(newsFrag);
+		}
+		
+		NewsPagerAdapter adapter = new NewsPagerAdapter(getSupportFragmentManager(), fragments);
+		pager.setAdapter(adapter);
+		pager.setOnPageChangeListener(onPagerChangedListener);
+		pager.setCurrentItem(getIntent().getExtras().getInt(Variables.SELECTED_ITEM_POSITION));
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.news, menu);
-		return true;
-	}
+	private OnPageChangeListener onPagerChangedListener = new ViewPager.SimpleOnPageChangeListener(){
+		public void onPageSelected(int position) {
+			fragments.get(position).retrieveContent();
+		};
+	};
 
 }

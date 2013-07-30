@@ -1,13 +1,27 @@
 package duyhung.news.adapter;
 
-import android.content.Context;
-import android.support.v4.view.ViewPager;
+import java.util.List;
 
-public class NewsPagerAdapter extends ViewPager {
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import duyhung.news.NewsFragment;
 
-	public NewsPagerAdapter(Context context) {
-		super(context);
-		// TODO Auto-generated constructor stub
+public class NewsPagerAdapter extends FragmentPagerAdapter {
+
+	private List<NewsFragment> fragList;
+
+	public NewsPagerAdapter(FragmentManager fm, List<NewsFragment> list) {
+		super(fm);
+		this.fragList = list;
+	}
+
+	public NewsFragment getItem(int position) {
+		return fragList.get(position);
+	}
+
+	@Override
+	public int getCount() {
+		return fragList.size();
 	}
 
 }

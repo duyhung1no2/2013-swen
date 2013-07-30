@@ -15,11 +15,11 @@ import duyhung.news.adapter.CategoryPagerAdapter;
 
 public class CategoryActivity extends FragmentActivity {
 
-	private ViewPager newsPager;
+	private ViewPager pager;
 	private ActionBar actionBar;
 
 	private CategoryPagerAdapter adapter;
-	private List<NewsFragment> fragmentList;
+	private List<CategoryFragment> fragmentList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,23 +30,23 @@ public class CategoryActivity extends FragmentActivity {
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		newsPager = (ViewPager) findViewById(R.id.categoryPager);
+		pager = (ViewPager) findViewById(R.id.categoryPager);
 
-		fragmentList = new ArrayList<NewsFragment>() {
+		fragmentList = new ArrayList<CategoryFragment>() {
 			private static final long serialVersionUID = 1L;
 			{
 				for (int i = 0; i < getResources().getStringArray(R.array.vne_categories).length; i++) {
-					NewsFragment newsFrag = new NewsFragment();
+					CategoryFragment cateFrag = new CategoryFragment();
 					Bundle bundle = new Bundle();
-					bundle.putInt(NewsFragment.ARG_POSITION, i);
-					newsFrag.setArguments(bundle);
-					add(newsFrag);
+					bundle.putInt(CategoryFragment.ARG_POSITION, i);
+					cateFrag.setArguments(bundle);
+					add(cateFrag);
 				}
 			}
 		};
 		adapter = new CategoryPagerAdapter(getSupportFragmentManager(), fragmentList);
-		newsPager.setAdapter(adapter);
-		newsPager.setOnPageChangeListener(onNewsPagerChangedListener);
+		pager.setAdapter(adapter);
+		pager.setOnPageChangeListener(onNewsPagerChangedListener);
 
 		for (int i = 0; i < adapter.getCount(); i++) {
 			actionBar.addTab(actionBar.newTab().setText(getResources().getStringArray(R.array.vne_categories)[i]).setTabListener(tabListener));
@@ -68,7 +68,7 @@ public class CategoryActivity extends FragmentActivity {
 
 		@Override
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
-			newsPager.setCurrentItem(tab.getPosition());
+			pager.setCurrentItem(tab.getPosition());
 		}
 
 		@Override
