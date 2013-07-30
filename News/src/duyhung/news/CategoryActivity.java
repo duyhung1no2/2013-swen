@@ -30,7 +30,7 @@ public class CategoryActivity extends FragmentActivity {
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		newsPager = (ViewPager) findViewById(R.id.newsPager);
+		newsPager = (ViewPager) findViewById(R.id.categoryPager);
 
 		fragmentList = new ArrayList<NewsFragment>() {
 			private static final long serialVersionUID = 1L;
