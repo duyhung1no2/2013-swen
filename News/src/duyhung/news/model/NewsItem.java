@@ -14,8 +14,7 @@ public class NewsItem implements Serializable {
 
 	}
 
-	public NewsItem(String title, String link, String description,
-			String pubDate) {
+	public NewsItem(String title, String link, String description, String pubDate) {
 		super();
 		this.title = title;
 		this.link = link;

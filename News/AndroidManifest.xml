@@ -29,7 +29,7 @@
             android:label="@string/title_activity_news" >
         </activity>
         <activity
-            android:name="duyhung.news.NewsReadActivity"
+            android:name="duyhung.news.NewsDetailFragment"
             android:label="@string/title_activity_news_read" >
         </activity>
     </application>

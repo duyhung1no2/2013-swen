@@ -7,7 +7,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import duyhung.news.model.Variables;
 
-public class NewsReadActivity extends Activity {
+public class NewsDetailFragment extends Activity {
 
 	private WebView newsWebView;
 	private ProgressDialog progressDialog;
@@ -15,7 +15,7 @@ public class NewsReadActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_news_read);
+		setContentView(R.layout.fragment_news_detail);
 
 		String newsLink = getIntent().getExtras().getString(Variables.LINK);
 		

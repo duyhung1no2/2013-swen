@@ -66,7 +66,7 @@ public class NewsFragment extends Fragment {
 		@Override
 		public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 			String newsLink = ((NewsItem) adapterView.getAdapter().getItem(position)).getLink();
-			Intent newsDetailsIntent = new Intent(getActivity(), NewsReadActivity.class);
+			Intent newsDetailsIntent = new Intent(getActivity(), NewsDetailFragment.class);
 			newsDetailsIntent.putExtra(Variables.LINK, newsLink);
 			startActivity(newsDetailsIntent);
 		}
