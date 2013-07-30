@@ -31,7 +31,6 @@ public class NewsReadActivity extends Activity {
 		
 		newsWebView.setWebViewClient(new NewsWebViewClient());
 		newsWebView.loadUrl(newsLink);
-//		new RetrieveNewsDetails().execute(newsLink);
 	}
 
 	private class NewsWebViewClient extends WebViewClient{

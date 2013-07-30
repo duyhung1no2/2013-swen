@@ -36,7 +36,10 @@ public class NewsFragment extends Fragment {
 		newsListView = (ListView) v.findViewById(R.id.newsListView);
 		newsListView.setAdapter(new NewsAdapter(getActivity(), newsList));				
 		newsListView.setOnItemClickListener(onNewsItemClickListener);
-
+		
+		if(getArguments().getInt(ARG_POSITION) == 0){
+			retrieveNews();
+		}
 		return v;
 	}
 
