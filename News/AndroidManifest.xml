@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="duyhung.news.MainActivity"
+            android:name="duyhung.news.CategoryActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,6 +33,10 @@
         <activity
             android:name="duyhung.news.NewsDetailFragment"
             android:label="@string/title_activity_news_read" >
+        </activity>
+        <activity
+            android:name="duyhung.news.NewsActivity"
+            android:label="@string/title_activity_news" >
         </activity>
     </application>
 

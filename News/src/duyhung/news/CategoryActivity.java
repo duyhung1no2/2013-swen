@@ -13,7 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import duyhung.news.adapter.NewsPagerAdapter;
 
-public class MainActivity extends FragmentActivity {
+public class CategoryActivity extends FragmentActivity {
 
 	private ViewPager newsPager;
 	private ActionBar actionBar;
@@ -24,7 +24,7 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_category);
 
 		actionBar = getActionBar();
 		actionBar.setHomeButtonEnabled(true);
