@@ -15,6 +15,7 @@ import duyhung.news.model.Variables;
 public class RssReader {
 
 	public List<NewsItem> getNewsList(String inputLink) {
+
 		List<NewsItem> newsList = new ArrayList<NewsItem>();
 
 		try {
@@ -39,4 +40,5 @@ public class RssReader {
 
 		return newsList;
 	}
+
 }
