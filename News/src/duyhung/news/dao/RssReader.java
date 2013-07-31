@@ -9,6 +9,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import duyhung.news.CategoryFragment;
 import duyhung.news.model.NewsItem;
 import duyhung.news.model.Variables;
 
@@ -23,7 +24,7 @@ public class RssReader {
 
 			NodeList itemList = doc.getElementsByTagName(Variables.ITEM);
 			if (itemList != null && itemList.getLength() > 0) {
-				for (int i = 0; i < 10/*itemList.getLength()*/; i++) {
+				for (int i = 0; i < CategoryFragment.ITEM_PER_PAGE; i++) {
 					Element crtElm = (Element) itemList.item(i);
 					String title = crtElm.getElementsByTagName(Variables.TITLE).item(0).getTextContent();
 					String link = crtElm.getElementsByTagName(Variables.LINK).item(0).getTextContent();
@@ -39,6 +40,29 @@ public class RssReader {
 		}
 
 		return newsList;
+	}
+	
+	public List<NewsItem> getMoreItem(String inputLink, List<NewsItem> list, int start, int end) {
+		try {
+			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputLink);
+
+			NodeList itemList = doc.getElementsByTagName(Variables.ITEM);
+			if (itemList != null && itemList.getLength() > 0) {
+				for (int i = start; i < end && i< itemList.getLength(); i++) {
+					Element crtElm = (Element) itemList.item(i);
+					String title = crtElm.getElementsByTagName(Variables.TITLE).item(0).getTextContent();
+					String link = crtElm.getElementsByTagName(Variables.LINK).item(0).getTextContent();
+					String description = crtElm.getElementsByTagName(Variables.DESCRIPTION).item(0).getTextContent();
+					String pubDate = crtElm.getElementsByTagName(Variables.PUB_DATE).item(0).getTextContent();
+
+					list.add(new NewsItem(title, link, description, pubDate));
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }
