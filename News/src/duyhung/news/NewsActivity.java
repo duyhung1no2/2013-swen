@@ -23,6 +23,8 @@ public class NewsActivity extends FragmentActivity {
 		setContentView(R.layout.activity_news);
 		setTitle("Đọc tin");
 		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		pager = (ViewPager) findViewById(R.id.newsPager);
 		
 		urls = getIntent().getExtras().getStringArray(Variables.LINK);
@@ -51,6 +53,19 @@ public class NewsActivity extends FragmentActivity {
 		public void onPageSelected(int position) {
 			fragments.get(position).retrieveContent();
 		};
+	};
+	
+	@Override
+	public boolean onOptionsItemSelected(android.view.MenuItem item) {
+		super.onOptionsItemSelected(item);
+		
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			super.onBackPressed();
+			break;
+		}
+
+		return true;
 	};
 
 }
