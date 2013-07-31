@@ -7,10 +7,14 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.widget.Toast;
 import duyhung.news.adapter.CategoryPagerAdapter;
 
 public class CategoryActivity extends FragmentActivity {
@@ -25,7 +29,7 @@ public class CategoryActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_category);
-
+		
 		actionBar = getActionBar();
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -51,6 +55,7 @@ public class CategoryActivity extends FragmentActivity {
 		for (int i = 0; i < adapter.getCount(); i++) {
 			actionBar.addTab(actionBar.newTab().setText(getResources().getStringArray(R.array.vne_categories)[i]).setTabListener(tabListener));
 		}
+		checkNetwork();
 	}
 
 	private OnPageChangeListener onNewsPagerChangedListener = new ViewPager.SimpleOnPageChangeListener() {
@@ -76,5 +81,15 @@ public class CategoryActivity extends FragmentActivity {
 		}
 
 	};
+	
+	public void checkNetwork(){
+		ConnectivityManager conm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		if(conm.getNetworkInfo(1).getState() == NetworkInfo.State.CONNECTED) {
+			Toast.makeText(getApplicationContext(), "Đang sử dụng mạng " + conm.getActiveNetworkInfo().getTypeName(), Toast.LENGTH_LONG).show();
+		} else if(conm.getNetworkInfo(1).getState() == NetworkInfo.State.DISCONNECTED) {
+			Toast.makeText(getApplicationContext(), "Yêu cầu kết nối mạng WIFI để sử dụng ứng dụng nhanh nhất", Toast.LENGTH_LONG).show();
+		}
+	}
 
 }
