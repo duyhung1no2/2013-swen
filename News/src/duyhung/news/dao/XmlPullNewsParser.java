@@ -51,7 +51,9 @@ public class XmlPullNewsParser {
 			e.printStackTrace();
 		}
 
-		return convertToList(result);
+		List<NewsItem> newsList = convertToList(result);
+		resortList(newsList, inputLink);
+		return newsList;
 	}
 
 	public List<NewsItem> getMoreItem(String inputLink, List<NewsItem> list, int start, int end) {
@@ -84,8 +86,20 @@ public class XmlPullNewsParser {
 				list.add(item);
 			}
 		}
-
 		return list;
 	}
 
+	private void resortList(List<NewsItem> list, String link) {
+		if (link.equals("http://sohoa.vnexpress.net/rss/trang-chu")) {
+			for(NewsItem item : list){
+				String date = item.getPubDate();
+				String url = item.getLink();
+				String desc = item.getDescription();
+				
+				item.setDescription(url);
+				item.setPubDate(desc);
+				item.setLink(date);
+			}
+		}
+	}
 }
