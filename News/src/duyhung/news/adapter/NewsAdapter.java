@@ -60,9 +60,11 @@ public class NewsAdapter extends ArrayAdapter<NewsItem> {
 	}
 
 	private String getImageUrl(String desc) {
-		Matcher matcher = Pattern.compile("<img.*?src=\"(.*?)\".*?>").matcher(desc);
-		if (matcher.find())
-			return matcher.group(1);
+		if(desc != null && !"".equals(desc)) {
+			Matcher matcher = Pattern.compile("<img.*?src=\"(.*?)\".*?>").matcher(desc);
+			if (matcher.find())
+				return matcher.group(1);
+		}
 		return "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/372810_262700667105773_1895213017_q.jpg";
 	}
 

@@ -17,26 +17,7 @@ public class NewsFragment extends Fragment {
 	
 	public static final String IS_SELECTED = "IS_SELECTED";
 	private String newsLink;
-	
-/*	private static String FILENAME = "";
-	private static final String OUTPUT_FILENAME = "NEWS_OUTPUT.html";
-	private static String OUTPUT = "<html>" +
-												"<head>" +
-													"<script src=\"http://code.jquery.com/jquery-1.9.1.js\"></script>" +
-													"<script>$(document).ready(function(){" +
-														"$('.spanTime').load('" + FILENAME + " .spanTime');" +
-														"$('.title').load('" + FILENAME + " .title');" +
-														"$('.fck_detail').load('" + FILENAME + " .fck_detail');});" +
-													"</script>" +
-												"</head>" +
-												"<body>" +
-													"<div class=\"title\"></div>" +
-													"<div class=\"spanTime\" style=\"font-style:italic;\"></div>" +
-													"<div class=\"fck_detail\"></div>" +
-												"</body>" +
-											"</html>"; 
-*/
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_news, container, false);
@@ -56,67 +37,8 @@ public class NewsFragment extends Fragment {
 			newsWebView.setWebViewClient(new NewsWebViewClient());
 			newsWebView.loadUrl(newsLink);
 
-//			writeOutputFile();
-//			writeNewsFile(newsLink);
-//			newsWebView.loadUrl("file:///" + Environment.getExternalStorageDirectory() + "/" + OUTPUT_FILENAME);
 		}
 	}
-
-/*	private void writeNewsFile(String newsLink) {
-		FILENAME = Uri.parse(newsLink).getLastPathSegment();
-		File file = new File(Environment.getExternalStorageDirectory() + "/", FILENAME);
-		try {
-			if (!file.exists())
-				file.createNewFile();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		ByteArrayOutputStream bais = new ByteArrayOutputStream();
-		InputStream inStream = null;
-		URL url = null;
-		try {
-			url = new URL(newsLink);
-
-			inStream = url.openStream();
-			byte[] byteChunk = new byte[4096];
-			int n;
-
-			while ((n = inStream.read(byteChunk)) > 0) {
-				bais.write(byteChunk, 0, n);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (inStream != null) {
-				try {
-					inStream.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		try {
-			FileOutputStream outStream = new FileOutputStream(file);
-			outStream.write(bais.toByteArray());
-			outStream.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void writeOutputFile() {
-		File f = new File(Environment.getExternalStorageDirectory() + "/" + OUTPUT_FILENAME);
-		try {
-			FileOutputStream outStream = new FileOutputStream(f);
-			outStream.write(OUTPUT.getBytes());
-			outStream.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-*/
 	
 	private class NewsWebViewClient extends WebViewClient {
 		@Override
@@ -127,5 +49,29 @@ public class NewsFragment extends Fragment {
 			super.onPageFinished(view, url);
 		}
 	}
+	
+//	private class LoadWebTask extends AsyncTask<String, Void, Void> {
+//		@Override
+//		protected Void doInBackground(String... urls) {
+//			HtmlCleaner cleaner = new HtmlCleaner();
+//			TagNode node = null;
+//			String content = "";
+//			try {
+//				node = cleaner.clean(new URL(urls[0]).openStream());
+//				
+//				Object[] contentNode = node.evaluateXPath("//html/body/div[id='wrap']/div[id='content']/div[class='content-center']/div[class='content']/div[class='cxtLeft']/div[class='fck_detail']/");
+//				for (int i = 0; i < contentNode.length; i++) {
+////					NodeList childNode = contentNode
+////							item(i).getChildNodes();
+////					content += contentNode[i].get
+//				}
+//						
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//
+//			return null;
+//		}
+//	}
 
 }

@@ -14,7 +14,6 @@
         <item name="">Vi tính</item>
         <item name="">Ôtô - Xe máy</item>
         <item name="">Bạn đọc viết</item>
-        <item name="">Tâm sự</item>
         <item name="">Cười</item>
     </string-array>
     <string-array name="vne_rss">
@@ -30,7 +29,6 @@
         <item name="">http://sohoa.vnexpress.net/rss/trang-chu</item>
         <item name="">http://vnexpress.net/rss/oto-xe-may.rss</item>
         <item name="">http://vnexpress.net/rss/ban-doc-viet.rss</item>
-        <item name="">http://vnexpress.net/rss/ban-doc-viet-tam-su.rss</item>
         <item name="">http://vnexpress.net/rss/cuoi.rss</item>
     </string-array>
 

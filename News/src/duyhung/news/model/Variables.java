@@ -8,7 +8,7 @@ public class Variables {
 	public static final String TITLE = "title";
 	public static final String LINK = "link";
 	public static final String DESCRIPTION = "description";
-	public static final String PUB_DATE = "pubDate";
+	public static final String DATE = "pubDate";
 	
 	public static final String SELECTED_ITEM_POSITION = "SELECTED_ITEM_POSITION";
 	

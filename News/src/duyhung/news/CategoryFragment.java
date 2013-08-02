@@ -17,7 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import duyhung.news.adapter.NewsAdapter;
-import duyhung.news.dao.RssReader;
+import duyhung.news.dao.XmlPullNewsParser;
 import duyhung.news.model.NewsItem;
 import duyhung.news.model.Variables;
 
@@ -31,7 +31,7 @@ public class CategoryFragment extends Fragment {
 	private String linkRss;
 
 	public static final String ARG_POSITION = "ARG_POSITION";
-	public static final int ITEM_PER_PAGE = 20;
+	public static final int ITEM_PER_PAGE = 15;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -101,7 +101,7 @@ public class CategoryFragment extends Fragment {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			newsList = new RssReader().getNewsList(linkRss);
+			newsList = new XmlPullNewsParser().getNewsList(linkRss);
 			return null;
 		}
 
@@ -122,7 +122,7 @@ public class CategoryFragment extends Fragment {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			newsList = new RssReader().getMoreItem(linkRss, newsList, newsList.size(), newsList.size() + ITEM_PER_PAGE);
+			newsList = new XmlPullNewsParser().getMoreItem(linkRss, newsList, newsList.size(), newsList.size() + ITEM_PER_PAGE);
 			return null;
 		}
 
