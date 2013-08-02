@@ -57,12 +57,44 @@ public class XmlPullNewsParser {
 	}
 
 	public List<NewsItem> getMoreItem(String inputLink, List<NewsItem> list, int start, int end) {
+
+		String[] result = new String[list.size() * 4 + CategoryFragment.ITEM_PER_PAGE * 4];
+		int iterator = 0;
+
 		try {
+
+			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+			factory.setNamespaceAware(true);
+			XmlPullParser parser = factory.newPullParser();
+			parser.setInput(new URL(inputLink).openStream(), "UTF-8");
+
+			int type = parser.getEventType();
+
+			while (type != XmlPullParser.START_TAG || !Variables.ITEM.equals(parser.getName()) && type != XmlPullParser.END_DOCUMENT) {
+				type = parser.next();
+			}
+
+			do {
+
+				while (type != XmlPullParser.START_TAG && type != XmlPullParser.END_DOCUMENT) {
+					type = parser.next();
+				}
+
+				if (Variables.TITLE.equals(parser.getName()) | Variables.DESCRIPTION.equals(parser.getName()) | Variables.DATE.equals(parser.getName()) | Variables.LINK.equals(parser.getName())) {
+					result[iterator++] = getElementText(parser);
+				}
+
+				type = parser.next();
+
+			} while (type != XmlPullParser.END_DOCUMENT && iterator < result.length -1);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return list;
+
+		List<NewsItem> newsList = convertToList(result);
+		resortList(newsList, inputLink);
+		return newsList;
 	}
 
 	private String getElementText(XmlPullParser parser) throws XmlPullParserException, IOException {
